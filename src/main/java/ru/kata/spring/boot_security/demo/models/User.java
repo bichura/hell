@@ -3,8 +3,6 @@ package ru.kata.spring.boot_security.demo.models;
 import jakarta.persistence.*;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -40,7 +38,6 @@ public class User implements UserDetails {
     private LocalDate dateOfBirth;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @LazyCollection(LazyCollectionOption.EXTRA)
     @Fetch(FetchMode.JOIN)
     @JoinTable(name = "roles_of_users",
             joinColumns = @JoinColumn(name = "user_id"),

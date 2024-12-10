@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<html lang="ru" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Login page</title>
+  <title>Аутентификация</title>
 </head>
 <body>
 <form name="f" method="post" action="/process_login">
@@ -17,9 +17,9 @@
     </tr>
   </table>
   <br/>
-  <input type="submit" value="Login"/>
+  <button type="submit">Войти</button>
   <div th:if="${param.error}" style="color: red">
-    Неправильные имя или пароль
+    Неправильные имя или пароль!
   </div>
 </form>
 </body>
