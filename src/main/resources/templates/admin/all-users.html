@@ -12,7 +12,7 @@
             <td th:text="${user}"></td>
             <td>
                 <form th:action="@{/admin/edit(id=${user.getId()})}" method="GET">
-                    <input type="hidden" name="id" th:value="${user.getId()}" />
+                    <input type="hidden" name="id" th:value="${user.getId()}"/>
                     <input type="submit" value="Изменить"/>
                 </form>
             </td>

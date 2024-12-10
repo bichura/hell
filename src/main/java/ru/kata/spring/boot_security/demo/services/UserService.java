@@ -1,7 +1,6 @@
 package ru.kata.spring.boot_security.demo.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -18,25 +17,28 @@ import java.util.List;
 @Service
 @Transactional(readOnly = true)
 public class UserService implements UserDetailsService {
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    private RoleRepository roleRepository;
-
-    @Autowired
-    @Lazy
-    private PasswordEncoder passwordEncoder;
+    public UserService(UserRepository userRepository,
+                       RoleRepository roleRepository,
+                       PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
         if (user == null) {
-            throw new UsernameNotFoundException(String.format("Пользователь %s не найден", username));
+            throw new UsernameNotFoundException(String.format("Пользователь %s не найден!", username));
         }
         if (user.getUsername() == null || user.getPassword() == null) {
-            throw new UsernameNotFoundException("Пользователь не имеет обязательных полей (username или password)");
+            throw new UsernameNotFoundException("Пользователь не имеет обязательных полей: username или password!");
         }
         return org.springframework.security.core.userdetails.User.builder()
                 .username(user.getUsername())
@@ -71,7 +73,7 @@ public class UserService implements UserDetailsService {
     @Transactional
     public void editUser(User user) {
         if (user.getId() == null) {
-            throw new IllegalArgumentException("User ID cannot be null");
+            throw new IllegalArgumentException("ID пользователя не может быть null");
         }
         User origUser = userRepository.findById(user.getId()).orElse(null);
         if (user.getPassword().isEmpty()) {

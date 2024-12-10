@@ -12,7 +12,7 @@ import ru.kata.spring.boot_security.demo.services.UserService;
 @RequestMapping("/admin")
 @Secured({"ROLE_ADMIN"})
 public class AdminController {
-    private UserService userService;
+    private final UserService userService;
 
     @Autowired
     public AdminController(UserService userService) {

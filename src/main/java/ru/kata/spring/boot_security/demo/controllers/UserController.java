@@ -11,8 +11,9 @@ import ru.kata.spring.boot_security.demo.services.UserService;
 
 @Controller
 @RequestMapping("/user")
+@Secured({"ROLE_ADMIN", "ROLE_USER"})
 public class UserController {
-    private UserService userService;
+    private final UserService userService;
 
     @Autowired
     public UserController(UserService userService) {
@@ -20,7 +21,6 @@ public class UserController {
     }
 
     @GetMapping
-    @Secured({"ROLE_ADMIN", "ROLE_USER"})
     public String getUser(Model model, Authentication authentication) {
         model.addAttribute("user", userService.findByUsername(authentication.getName()));
         return "user";

@@ -97,7 +97,6 @@ public class User implements UserDetails {
         this.dateOfBirth = dateOfBirth;
     }
 
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return getRoles().stream()
