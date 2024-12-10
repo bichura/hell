@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Создать профиль</title>
+</head>
+
+<body>
+<form th:method="POST" th:action="@{/admin/new}" th:object="${user}">
+    <div>
+        <h1>Добавить нового пользователя</h1>
+        <fieldset>
+            <table>
+                <tr>
+                    <td><label for="name">Имя:</label></td>
+                    <td><input type="text" th:field="*{firstName}" id="name"></td>
+                </tr>
+                <tr>
+                    <td><label for="lastName">Фамилия:</label></td>
+                    <td><input type="text" th:field="*{lastName}" id="lastName"></td>
+                </tr>
+                <tr>
+                    <td><label for="dateOfBirth">День рождения:</label></td>
+                    <td><input type="date" th:field="*{dateOfBirth}" id="dateOfBirth"></td>
+                </tr>
+                <tr>
+                    <td><label for="username">Логин:</label></td>
+                    <td><input type="text" th:field="*{username}" id="username"></td>
+                </tr>
+                <tr>
+                    <td><label for="password">Пароль:</label></td>
+                    <td><input type="password" th:field="*{password}" id="password"></td>
+                </tr>
+                <tr>
+                    <td><label>Роли:</label></td>
+                    <td>
+                        <div th:each="role : ${roles}">
+                            <input type="checkbox" th:field="*{roles}" th:value="${role.id}" th:text="${role.name}">
+                            <span th:text="${role.name}"></span><br>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+        <br>
+        <input type="submit" value="Сохранить профиль">
+    </div>
+</form>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Удаление пользователя</title>
+</head>
+<body>
+<form th:action="@{/admin/remove}" method="post">
+    <div>
+        <h1>Удалить профиль</h1>
+        <input type="hidden" th:name="id" th:value="${user.id}"/>
+        <p>Вы уверены, что хотите удалить пользователя <span th:text="${user.getUsername()}"></span> с ID <span
+                th:text="${user.getId()}"></span>?</p>
+        <br>
+        <button type="submit">Удалить</button>
+    </div>
+</form>
+</body>
+</html>

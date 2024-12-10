@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Пользователи</title>
+</head>
+<body>
+<h1>Активные пользователи</h1>
+<fieldset>
+    <table border="1">
+        <tr th:each="user : ${users}">
+            <td th:text="${user}"></td>
+            <td>
+                <form th:action="@{/admin/edit(id=${user.getId()})}" method="GET">
+                    <input type="hidden" name="id" th:value="${user.getId()}" />
+                    <input type="submit" value="Изменить"/>
+                </form>
+            </td>
+            <td>
+                <form th:action="@{/admin/remove(id=${user.getId()})}" method="POST">
+                    <input type="submit" value="Удалить"/>
+                </form>
+            </td>
+        </tr>
+    </table>
+    <hr/>
+    <form th:action="@{admin/new}" method="GET">
+        <input type="submit" value="Добавить пользователя">
+    </form>
+</fieldset>
+</body>
+</html>
