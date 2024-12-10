@@ -36,15 +36,18 @@
                     <td>
                         <div th:each="role : ${roles}">
                             <input type="checkbox" th:field="*{roles}" th:value="${role.id}" th:text="${role.name}">
-                            <span th:text="${role.name}"></span><br>
                         </div>
                     </td>
                 </tr>
             </table>
         </fieldset>
         <br>
-        <input type="submit" value="Сохранить профиль">
+        <button type="submit">Сохранить профиль</button>
     </div>
+</form>
+<hr>
+<form th:action="@{/logout}" method="post">
+    <button type="submit">Выход</button>
 </form>
 </body>
 </html>

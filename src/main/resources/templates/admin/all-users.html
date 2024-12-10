@@ -25,7 +25,11 @@
     </table>
     <hr/>
     <form th:action="@{admin/new}" method="GET">
-        <input type="submit" value="Добавить пользователя">
+        <button type="submit">Добавить пользователя</button>
+    </form>
+    <hr>
+    <form th:action="@{/logout}" method="POST">
+        <button type="submit">Выход</button>
     </form>
 </fieldset>
 </body>

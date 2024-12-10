@@ -9,7 +9,13 @@
 <p>Ваш логин: <span th:text="${user.username}"></span></p>
 <p>Дата рождения: <span th:text="${user.dateOfBirth}"></span></p>
 <div sec:authorize="hasRole('ADMIN')">
-    <a th:href="@{/admin}">Перейти к списку всех пользователей</a>
+    <form th:action="@{/admin}" method="GET">
+        <button type="submit">Список всех пользователей</button>
+    </form>
 </div>
+<hr>
+<form th:action="@{/logout}" method="POST">
+    <button type="submit">Выход</button>
+</form>
 </body>
 </html>
