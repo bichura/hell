@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Пользователи</title>
@@ -28,9 +28,20 @@
         <button type="submit">Добавить пользователя</button>
     </form>
     <hr>
-    <form th:action="@{/logout}" method="POST">
-        <button type="submit">Выход</button>
-    </form>
+    <table>
+        <tr>
+            <td>
+                <form th:action="@{/user}" method="GET">
+                    <button type="submit">Мой профиль</button>
+                </form>
+            </td>
+            <td>
+                <form th:action="@{/logout}" method="POST">
+                    <button type="submit">Выход</button>
+                </form>
+            </td>
+        </tr>
+    </table>
 </fieldset>
 </body>
 </html>
