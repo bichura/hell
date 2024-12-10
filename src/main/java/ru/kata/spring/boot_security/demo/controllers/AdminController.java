@@ -1,6 +1,7 @@
 package ru.kata.spring.boot_security.demo.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -9,6 +10,7 @@ import ru.kata.spring.boot_security.demo.services.UserService;
 
 @Controller
 @RequestMapping("/admin")
+@Secured({"ROLE_ADMIN"})
 public class AdminController {
     private UserService userService;
 

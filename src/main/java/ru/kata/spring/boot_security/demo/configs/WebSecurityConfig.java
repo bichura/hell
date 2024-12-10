@@ -16,7 +16,7 @@ import ru.kata.spring.boot_security.demo.services.UserService;
 
 @Configuration
 @EnableWebSecurity(debug = true)
-@EnableMethodSecurity(securedEnabled = true, jsr250Enabled = true)
+@EnableMethodSecurity(securedEnabled = true)
 public class WebSecurityConfig {
     private final SuccessUserHandler successUserHandler;
     private final UserService userService;
