@@ -8,10 +8,10 @@ import org.springframework.security.core.GrantedAuthority;
 public class Role implements GrantedAuthority {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
     @Column(unique = true, nullable = false)
-    String name;
+    private String name;
 
     public Long getId() {
         return id;

@@ -1,4 +1,4 @@
-package ru.kata.spring.boot_security.demo.configs;
+package ru.kata.spring.boot_security.demo.init;
 
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,10 +60,10 @@ public class DataInitializer {
             regularUser = new User();
             regularUser.setUsername("user");
             regularUser.setPassword("user");
-            adminUser.setFirstName("User");
-            adminUser.setLastName("Userov");
-            adminUser.setDateOfBirth(LocalDate.of(1991, 9, 7));
-            adminUser.setRoles(List.of(userRole));
+            regularUser.setFirstName("User");
+            regularUser.setLastName("Userov");
+            regularUser.setDateOfBirth(LocalDate.of(1991, 9, 7));
+            regularUser.setRoles(List.of(userRole));
             userService.saveUser(regularUser);
         }
     }
