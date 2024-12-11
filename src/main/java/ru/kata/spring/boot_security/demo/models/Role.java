@@ -3,6 +3,8 @@ package ru.kata.spring.boot_security.demo.models;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 
+import java.util.Objects;
+
 @Entity
 @Table(name = "roles")
 public class Role implements GrantedAuthority {
@@ -36,7 +38,7 @@ public class Role implements GrantedAuthority {
 
     @Override
     public int hashCode() {
-        return id.intValue();
+        return Objects.hash(id, name);
     }
 
     @Override
