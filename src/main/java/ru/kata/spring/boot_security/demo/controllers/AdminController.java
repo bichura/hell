@@ -5,16 +5,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.models.User;
+import ru.kata.spring.boot_security.demo.services.RoleService;
 import ru.kata.spring.boot_security.demo.services.UserService;
 
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
     private final UserService userService;
+    private final RoleService roleService;
 
     @Autowired
-    public AdminController(UserService userService) {
+    public AdminController(UserService userService,
+                           RoleService roleService) {
         this.userService = userService;
+        this.roleService = roleService;
     }
 
     @GetMapping
@@ -26,7 +30,7 @@ public class AdminController {
     @GetMapping("/new")
     public String saveUser(Model model) {
         model.addAttribute("user", new User());
-        model.addAttribute("roles", userService.getAllRoles());
+        model.addAttribute("roles", roleService.getAllRoles());
         return "admin/new";
     }
 
@@ -41,7 +45,7 @@ public class AdminController {
         User user = userService.getUserById(id);
         user.getRoles();
         model.addAttribute("user", user);
-        model.addAttribute("roles", userService.getAllRoles());
+        model.addAttribute("roles", roleService.getAllRoles());
         return "admin/edit";
     }
 
