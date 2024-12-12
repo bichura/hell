@@ -10,7 +10,7 @@ public interface UserService extends UserDetailsService {
 
     User getUserById(Long id);
 
-    User findByUsername(String username);
+    User findByEmail(String email);
 
     void saveUser(User user);
 

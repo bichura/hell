@@ -38,6 +38,7 @@ public class WebSecurityConfig {
                                 .anyRequest().authenticated())
                 .formLogin((form) -> form.loginPage("/login")
                         .loginProcessingUrl("/process_login")
+                        .usernameParameter("email")
                         .successHandler(successUserHandler)
                         .failureUrl("/login?error")
                         .permitAll())

@@ -9,7 +9,6 @@ import ru.kata.spring.boot_security.demo.repositories.RoleRepository;
 import ru.kata.spring.boot_security.demo.repositories.UserRepository;
 import ru.kata.spring.boot_security.demo.services.UserService;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Component
@@ -43,26 +42,26 @@ public class DataInitializer {
             roleRepository.save(userRole);
         }
 
-        User adminUser = userRepository.findByUsername("admin");
+        User adminUser = userRepository.findByEmail("admin@gmail.com");
         if (adminUser == null) {
             adminUser = new User();
-            adminUser.setUsername("admin");
+            adminUser.setEmail("admin@gmail.com");
             adminUser.setPassword("admin");
             adminUser.setFirstName("Admin");
             adminUser.setLastName("Adminin");
-            adminUser.setDateOfBirth(LocalDate.of(2000, 12, 16));
+            adminUser.setAge((byte) 24);
             adminUser.setRoles(List.of(adminRole, userRole));
             userService.saveUser(adminUser);
         }
 
-        User regularUser = userRepository.findByUsername("user");
+        User regularUser = userRepository.findByEmail("user@gmail.com");
         if (regularUser == null) {
             regularUser = new User();
-            regularUser.setUsername("user");
+            regularUser.setEmail("user@gmail.com");
             regularUser.setPassword("user");
             regularUser.setFirstName("User");
             regularUser.setLastName("Userov");
-            regularUser.setDateOfBirth(LocalDate.of(1991, 9, 7));
+            regularUser.setAge((byte) 33);
             regularUser.setRoles(List.of(userRole));
             userService.saveUser(regularUser);
         }

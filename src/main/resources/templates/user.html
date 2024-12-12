@@ -6,8 +6,8 @@
 </head>
 <body>
 <h1>Добро пожаловать, <span th:text="${user.firstName + ' ' + user.lastName}"></span>!</h1>
-<p>Ваш логин: <span th:text="${user.username}"></span></p>
-<p>Дата рождения: <span th:text="${user.dateOfBirth}"></span></p>
+<p>Ваша почта: <span th:text="${user.username}"></span></p>
+<p>Ваш возраст: <span th:text="${user.age}"></span></p>
 <div sec:authorize="hasRole('ADMIN')">
     <form th:action="@{/admin}" method="GET">
         <button type="submit">Список всех пользователей</button>

@@ -20,12 +20,12 @@
                     <td><input type="text" th:field="*{lastName}" id="lastName"></td>
                 </tr>
                 <tr>
-                    <td><label for="dateOfBirth">День рождения:</label></td>
-                    <td><input type="date" th:field="*{dateOfBirth}" id="dateOfBirth"></td>
+                    <td><label for="age">Возраст:</label></td>
+                    <td><input type="number" th:field="*{age}" id="age" min="0" max="125"></td>
                 </tr>
                 <tr>
-                    <td><label for="username">Логин:</label></td>
-                    <td><input type="text" th:field="*{username}" id="username"></td>
+                    <td><label for="email">Почта:</label></td>
+                    <td><input type="email" th:field="*{email}" id="email"></td>
                 </tr>
                 <tr>
                     <td><label for="password">Пароль:</label></td>

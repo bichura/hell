@@ -3,12 +3,10 @@ package ru.kata.spring.boot_security.demo.models;
 import jakarta.persistence.*;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
@@ -22,7 +20,7 @@ public class User implements UserDetails {
     private Long id;
 
     @Column(unique = true, nullable = false)
-    private String username;
+    private String email;
 
     @Column(nullable = false)
     private String password;
@@ -34,8 +32,7 @@ public class User implements UserDetails {
     private String lastName;
 
     @Column(nullable = false)
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate dateOfBirth;
+    private Byte age;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @Fetch(FetchMode.JOIN)
@@ -43,6 +40,16 @@ public class User implements UserDetails {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<Role> roles;
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
 
     public Long getId() {
         return id;
@@ -52,18 +59,12 @@ public class User implements UserDetails {
         this.id = id;
     }
 
-    @Override
-    public String getUsername() {
-        return username;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    @Override
-    public String getPassword() {
-        return password;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public void setPassword(String password) {
@@ -86,19 +87,16 @@ public class User implements UserDetails {
         this.lastName = lastName;
     }
 
-    public LocalDate getDateOfBirth() {
-        return dateOfBirth;
+    public Byte getAge() {
+        return age;
     }
 
-    public void setDateOfBirth(LocalDate dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return getRoles().stream()
-                .map(role -> new SimpleGrantedAuthority(role.getName()))
-                .collect(Collectors.toList());
+    public void setAge(Byte age) {
+        if (age >= 0 && age <= 125) {
+            this.age = age;
+        } else {
+            throw new IllegalArgumentException("Age must be between 0 and 125");
+        }
     }
 
     public List<Role> getRoles() {
@@ -110,14 +108,21 @@ public class User implements UserDetails {
     }
 
     @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return getRoles().stream()
+                .map(role -> new SimpleGrantedAuthority(role.getName()))
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public String toString() {
         return "Пользователь " + getUsername() + " по имени: " + getFirstName() + " " + getLastName()
-                + ", " + getDateOfBirth();
+                + ", " + getAge();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, password);
+        return Objects.hash(id, email, password);
     }
 
     @Override
@@ -129,9 +134,9 @@ public class User implements UserDetails {
         }
 
         User other = (User) obj;
-        return (this.id.equals(other.getId()) && this.username.equals(other.getUsername())
+        return (this.id.equals(other.getId()) && this.email.equals(other.getUsername())
                 && this.password.equals(other.getPassword())
-                && this.dateOfBirth.equals(other.getDateOfBirth())
+                && this.age.equals(other.getAge())
                 && this.firstName.equals(other.getFirstName())
                 && this.lastName.equals(other.getLastName()));
     }
