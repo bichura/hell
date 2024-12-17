@@ -1,5 +1,6 @@
 package ru.kata.spring.boot_security.demo.models;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 
@@ -7,6 +8,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "roles")
+@JsonSerialize
 public class Role implements GrantedAuthority {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

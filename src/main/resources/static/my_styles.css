@@ -1,0 +1,9 @@
+.navbar {
+    padding: 0.25rem;
+}
+
+.small-select {
+    height: 60px;
+    padding-left: 10px;
+    padding-right: 10px;
+}

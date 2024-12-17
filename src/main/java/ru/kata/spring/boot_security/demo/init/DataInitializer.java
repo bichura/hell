@@ -28,30 +28,18 @@ public class DataInitializer {
 
     @PostConstruct
     public void initData() {
-        Role adminRole = roleRepository.findByName("ROLE_ADMIN");
-        if (adminRole == null) {
-            adminRole = new Role();
-            adminRole.setName("ROLE_ADMIN");
-            roleRepository.save(adminRole);
-        }
-
-        Role userRole = roleRepository.findByName("ROLE_USER");
+        Role userRole = roleRepository.findByName("USER");
         if (userRole == null) {
             userRole = new Role();
-            userRole.setName("ROLE_USER");
+            userRole.setName("USER");
             roleRepository.save(userRole);
         }
 
-        User adminUser = userRepository.findByEmail("admin@gmail.com");
-        if (adminUser == null) {
-            adminUser = new User();
-            adminUser.setEmail("admin@gmail.com");
-            adminUser.setPassword("admin");
-            adminUser.setFirstName("Admin");
-            adminUser.setLastName("Adminin");
-            adminUser.setAge((byte) 24);
-            adminUser.setRoles(List.of(adminRole, userRole));
-            userService.saveUser(adminUser);
+        Role adminRole = roleRepository.findByName("ADMIN");
+        if (adminRole == null) {
+            adminRole = new Role();
+            adminRole.setName("ADMIN");
+            roleRepository.save(adminRole);
         }
 
         User regularUser = userRepository.findByEmail("user@gmail.com");
@@ -64,6 +52,18 @@ public class DataInitializer {
             regularUser.setAge((byte) 33);
             regularUser.setRoles(List.of(userRole));
             userService.saveUser(regularUser);
+        }
+
+        User adminUser = userRepository.findByEmail("admin@gmail.com");
+        if (adminUser == null) {
+            adminUser = new User();
+            adminUser.setEmail("admin@gmail.com");
+            adminUser.setPassword("admin");
+            adminUser.setFirstName("Admin");
+            adminUser.setLastName("Adminin");
+            adminUser.setAge((byte) 24);
+            adminUser.setRoles(List.of(adminRole, userRole));
+            userService.saveUser(adminUser);
         }
     }
 }

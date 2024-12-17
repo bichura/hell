@@ -2,6 +2,7 @@ package ru.kata.spring.boot_security.demo.services;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -34,7 +35,7 @@ public class UserServiceImpl implements UserService {
         return org.springframework.security.core.userdetails.User.builder()
                 .username(user.getUsername())
                 .password(user.getPassword())
-                .authorities(user.getAuthorities())
+                .roles(user.getAuthorities().stream().map(GrantedAuthority::getAuthority).toArray(String[]::new))
                 .build();
     }
 
