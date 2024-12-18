@@ -1,7 +1,5 @@
 package ru.kata.spring.boot_security.demo.models;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.persistence.*;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -16,7 +14,6 @@ import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "users")
-@JsonDeserialize(as = User.class)
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,6 +40,8 @@ public class User implements UserDetails {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<Role> roles;
+
+    private String rolesJson;
 
     @Override
     public String getUsername() {
@@ -108,6 +107,14 @@ public class User implements UserDetails {
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
+    }
+
+    public String getRolesJson() {
+        return rolesJson;
+    }
+
+    public void setRolesJson(String rolesJson) {
+        this.rolesJson = rolesJson;
     }
 
     @Override
