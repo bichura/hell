@@ -7,3 +7,14 @@
     padding-left: 10px;
     padding-right: 10px;
 }
+
+.modal-body {
+    width: 40%;
+    left: 30%;
+    top: 30%;
+}
+
+.modal-dialog {
+    max-width: 40%;
+}
+

@@ -222,7 +222,7 @@
                 <h5 class="modal-title fs-5" id="editLabel">Edit user</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body text-center">
                 <form id="editUser" th:action="@{/admin/edit}" method="POST">
                     <div class="mb-3">
                         <label for="editId" class="form-label fw-bold mb-0 mt-2">ID</label>
@@ -274,7 +274,7 @@
                 <h5 class="modal-title fs-5" id="deleteLabel">Delete user</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body text-center">
                 <form id="deleteUser" th:action="@{/admin/remove/{id}}" method="POST">
                     <div class="mb-3">
                         <label for="deleteId" class="form-label fw-bold mb-0 mt-2">ID</label>
