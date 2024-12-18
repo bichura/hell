@@ -8,7 +8,6 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "roles")
-@JsonSerialize
 public class Role implements GrantedAuthority {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
